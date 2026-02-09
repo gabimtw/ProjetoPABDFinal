@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>AEGIS - Vincular Poderes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow">
+        <div class="container">
+            <a class="navbar-brand" href="/"><i class="fas fa-shield-halved"></i> AEGIS</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/herois">Heróis</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/viloes">Vilões</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/poderes">Poderes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/missoes">Missões</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <% if (success) { %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <%= success %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+        <% if (error) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%= error %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-bolt text-warning"></i> Atribuir Poder ao Herói</h2>
+            <a href="/herois" class="btn btn-outline-light">Voltar para Heróis</a>
+        </div>
+
+        <div class="card bg-secondary text-white shadow mb-5">
+            <div class="card-body">
+                <form action="/herois/poderes/vincular" method="POST" class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Herói</label>
+                        <select name="idHeroi" class="form-select" required>
+                            <% herois.forEach(h => { %>
+                                <option value="<%= h.IdHeroi %>"><%= h.Codinome %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Poder</label>
+                        <select name="idPoder" class="form-select" required>
+                            <% poderes.forEach(p => { %>
+                                <option value="<%= p.IdPoder %>"><%= p.NomePoder %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Nível de Domínio</label>
+                        <input type="text" name="nivel" class="form-control" placeholder="Ex: 80% ou Master">
+                    </div>
+                    <div class="col-md-1 d-flex align-items-end">
+                        <button type="submit" class="btn btn-warning w-100 text-dark fw-bold">Ligar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <h4>Vínculos Existentes</h4>
+        <table class="table table-dark table-hover mt-3">
+            <thead>
+                <tr>
+                    <th>Herói</th>
+                    <th>Poder</th>
+                    <th>Nível</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% vinculos.forEach(v => { %>
+                    <tr>
+                        <td><%= v.Codinome %></td>
+                        <td><%= v.NomePoder %></td>
+                        <td><%= v.NivelDominio %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+/* AEGIS — Tema profissional */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary: #0d6efd;
+    --primary-dark: #0b5ed7;
+    --accent: #ffc107;
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --muted: #6c757d;
+    --surface-strong: #212529;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: var(--bg);
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    color: #222;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Layout container */
+.container { max-width: 1100px; }
+
+/* Navbar improvements */
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.6px;
+}
+.navbar { padding: 0.6rem 1rem; }
+
+/* Hero header */
+.hero-header {
+    background: linear-gradient(135deg, #05386b 0%, var(--primary) 100%);
+    color: white;
+    padding: 44px 0;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(11, 92, 166, 0.12);
+    margin-bottom: 1.5rem;
+}
+
+/* Cards */
+.card {
+    background: var(--card);
+    border: 0;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(34, 41, 47, 0.06);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(34,41,47,0.09); }
+.card .card-header { background: transparent; border-bottom: 0; }
+
+/* Buttons */
+.btn { border-radius: 8px; }
+.btn-primary {
+    background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border: none;
+    box-shadow: 0 6px 18px rgba(13,110,253,0.12);
+}
+.btn-outline-primary { border-radius: 8px; }
+.btn-danger { box-shadow: none; }
+
+/* Tables */
+.table thead th {
+    background: linear-gradient(90deg, var(--surface-strong), #2d2f31);
+    color: #fff;
+    border: 0;
+}
+.table tbody tr:hover { background-color: #f1f6fb; }
+.table { border-radius: 8px; overflow: hidden; }
+
+/* Forms */
+.form-control { border-radius: 8px; }
+.form-select { border-radius: 8px; }
+
+/* Badges */
+.badge { border-radius: 8px; font-weight: 600; }
+
+/* Small helpers */
+.shadow-sm { box-shadow: 0 6px 14px rgba(34,41,47,0.04) !important; }
+.hover-zoom { transition: transform .25s ease; }
+.hover-zoom:hover { transform: scale(1.03); }
+
+/* Footer (used optionally) */
+.site-footer { padding: 2rem 0; color: var(--muted); font-size: 0.9rem; }
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .hero-header { padding: 28px 0; }
+    .container { padding: 0 1rem; }
+}

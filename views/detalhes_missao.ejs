@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>AEGIS - Centro de Operações</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow">
+        <div class="container">
+            <a class="navbar-brand" href="/"><i class="fas fa-shield-halved"></i> AEGIS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/herois">Heróis</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/viloes">Vilões</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/poderes">Poderes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/missoes">Missões</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="d-flex justify-content-end mb-3">
+            <a href="/missoes" class="btn btn-outline-secondary btn-sm">Voltar para Missões</a>
+        </div>
+
+    <div class="container">
+        <div class="card shadow-sm mb-4 border-primary">
+            <div class="card-body bg-primary text-white">
+                <h2 class="mb-0">Operação: <%= missao.NomeMissao %></h2>
+                <small>Localização: <%= missao.Localizacao %> | Risco: <%= missao.NivelAmeaca %></small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-dark text-white">Escalar Heróis para a Equipe</div>
+                    <div class="card-body">
+                        <form action="/missoes/escalar-heroi" method="POST" class="row g-2 mb-3">
+                            <input type="hidden" name="idMissao" value="<%= missao.IdMissao %>">
+                            <div class="col-8">
+                                <select name="idHeroi" class="form-select" required>
+                                    <option value="">Selecione um herói...</option>
+                                    <% herois.forEach(h => { %>
+                                        <option value="<%= h.IdHeroi %>"><%= h.Codinome %></option>
+                                    <% }) %>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary w-100">Escalar</button>
+                            </div>
+                        </form>
+                        
+                        <ul class="list-group">
+                            <% equipe.forEach(e => { %>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><i class="fas fa-mask me-2"></i> <%= e.Codinome %></span>
+                                    <span class="badge bg-success rounded-pill">Em campo</span>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow-sm mb-4 border-danger">
+                    <div class="card-header bg-danger text-white">Alvos e Ameaças Identificadas</div>
+                    <div class="card-body">
+                        <form action="/missoes/designar-vilao" method="POST" class="row g-2 mb-3">
+                            <input type="hidden" name="idMissao" value="<%= missao.IdMissao %>">
+                            <div class="col-8">
+                                <select name="idVilao" class="form-select" required>
+                                    <option value="">Selecione o vilão alvo...</option>
+                                    <% viloes.forEach(v => { %>
+                                        <option value="<%= v.IdVilao %>"><%= v.NomeVilao %></option>
+                                    <% }) %>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-danger w-100">Designar</button>
+                            </div>
+                        </form>
+
+                        <ul class="list-group">
+                            <% alvos.forEach(a => { %>
+                                <li class="list-group-item list-group-item-danger d-flex justify-content-between align-items-center">
+                                    <span><i class="fas fa-skull-crossbones me-2"></i> <%= a.NomeVilao %></span>
+                                    <span class="badge bg-dark">ALVO</span>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
